@@ -84,4 +84,74 @@ int main() {
     }
 
     return choice;
+} 
+
+void add_goat(list<Goat> &trip, string names[], string colors[]) {
+
+    int randName = rand() % SZ_NAMES;
+    int randColor = rand() % SZ_COLORS;
+    int randAge = rand() % (MAX_AGE + 1);
+
+    Goat g(names[randName], randAge, colors[randColor]);
+
+    trip.push_back(g);
+
+    cout << "Goat added: "
+         << g.get_name() << " ("
+         << g.get_age() << ", "
+         << g.get_color() << ")\n";
+} 
+
+void display_trip(list<Goat> trip) {
+
+    if (trip.empty()) {
+        cout << "No goats in the trip.\n";
+        return;
+    }
+
+    int index = 1;
+
+    for (auto g : trip) {
+        cout << "    [" << index << "] "
+             << g.get_name() << " ("
+             << g.get_age() << ", "
+             << g.get_color() << ")\n";
+        index++;
+    }
+}
+
+int select_goat(list<Goat> trip) {
+
+    display_trip(trip);
+
+    int choice;
+
+    cout << "Select goat --> ";
+    cin >> choice;
+
+    while (choice < 1 || choice > trip.size()) {
+        cout << "Invalid choice. Try again: ";
+        cin >> choice;
+    }
+
+    return choice;
+}
+
+void delete_goat(list<Goat> &trip) {
+
+    if (trip.empty()) {
+        cout << "No goats to delete.\n";
+        return;
+    }
+
+    int choice = select_goat(trip);
+
+    auto it = trip.begin();
+
+    for (int i = 1; i < choice; i++)
+        it++;
+
+    cout << "Deleting: " << it->get_name() << endl;
+
+    trip.erase(it);
 }
