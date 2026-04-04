@@ -94,15 +94,18 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
 
     Goat g(names[randName], randAge, colors[randColor]);
 
-    trip.push_back(g);
+    auto result = trip.insert(g);
 
-    cout << "Goat added: "
-         << g.get_name() << " ("
-         << g.get_age() << ", "
-         << g.get_color() << ")\n";
-} 
+    if (result.second)
+        cout << "Goat added: "
+             << g.get_name() << " ("
+             << g.get_age() << ", "
+             << g.get_color() << ")\n";
+    else
+        cout << "Duplicate goat not added.\n";
+}
 
-void display_trip(set<Goat> trip;) {
+void display_trip(set<Goat> trip) {
 
     if (trip.empty()) {
         cout << "No goats in the trip.\n";
