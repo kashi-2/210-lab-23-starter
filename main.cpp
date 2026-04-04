@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include <cstdlib>
 #include <ctime>
 #include "Goat.h"
@@ -12,17 +12,17 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> trip);
+void add_goat(set<Goat> trip, string [], string []);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main() {
 
     srand(time(0));
 
-    list<Goat> trip;
+    set<Goat> trip;;
 
     // read names
     ifstream fin("names.txt");
@@ -86,7 +86,7 @@ int main() {
     return choice;
 } 
 
-void add_goat(list<Goat> &trip, string names[], string colors[]) {
+void add_goat(set<Goat> &trip, string names[], string colors[]) {
 
     int randName = rand() % SZ_NAMES;
     int randColor = rand() % SZ_COLORS;
@@ -102,7 +102,7 @@ void add_goat(list<Goat> &trip, string names[], string colors[]) {
          << g.get_color() << ")\n";
 } 
 
-void display_trip(list<Goat> trip) {
+void display_trip(set<Goat> trip;) {
 
     if (trip.empty()) {
         cout << "No goats in the trip.\n";
