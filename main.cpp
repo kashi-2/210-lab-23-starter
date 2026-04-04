@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 23 | Akashdeep Singh
+// COMSC-210 | Lab 24 | Akashdeep Singh
 
 #include <iostream>
 #include <fstream>
@@ -12,17 +12,17 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(set<Goat> trip);
-void delete_goat(set<Goat> trip);
-void add_goat(set<Goat> trip, string [], string []);
-void display_trip(set<Goat> trip);
+int select_goat(const set<Goat> &trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string [], string []);
+void display_trip(const set<Goat> &trip);
 int main_menu();
 
 int main() {
 
     srand(time(0));
 
-    set<Goat> trip;;
+    set<Goat> trip;
 
     // read names
     ifstream fin("names.txt");
@@ -63,9 +63,9 @@ int main() {
     cout << "Goodbye!\n";
 
     return 0;
-} 
+}
 
-    int main_menu() {
+int main_menu() {
 
     int choice;
 
@@ -84,7 +84,7 @@ int main() {
     }
 
     return choice;
-} 
+}
 
 void add_goat(set<Goat> &trip, string names[], string colors[]) {
 
@@ -105,7 +105,7 @@ void add_goat(set<Goat> &trip, string names[], string colors[]) {
         cout << "Duplicate goat not added.\n";
 }
 
-void display_trip(set<Goat> trip) {
+void display_trip(const set<Goat> &trip) {
 
     if (trip.empty()) {
         cout << "No goats in the trip.\n";
@@ -123,7 +123,7 @@ void display_trip(set<Goat> trip) {
     }
 }
 
-int select_goat(list<Goat> trip) {
+int select_goat(const set<Goat> &trip) {
 
     display_trip(trip);
 
@@ -140,7 +140,7 @@ int select_goat(list<Goat> trip) {
     return choice;
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
 
     if (trip.empty()) {
         cout << "No goats to delete.\n";
@@ -151,10 +151,12 @@ void delete_goat(list<Goat> &trip) {
 
     auto it = trip.begin();
 
+    // move iterator to correct position
     for (int i = 1; i < choice; i++)
         it++;
 
-    cout << "Deleting: " << it->get_name() << endl;
+    cout << "Deleting: "
+         << it->get_name() << endl;
 
     trip.erase(it);
 }
