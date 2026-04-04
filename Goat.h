@@ -41,7 +41,11 @@ public:
 
     // write overloaded < operator for the std::list
     bool operator<(const Goat& other) const {
+    if (name != other.name)
         return name < other.name;
+    if (age != other.age)
+        return age < other.age;
+    return color < other.color;
     }
 };
 
